@@ -47,6 +47,39 @@ class Dashboard extends Component {
   };
 
   componentWillMount() {
+    // Domain and API endpoints which are used for requests:
+    // var proxyDomain = 'https://invotra-api-cors-proxy.herokuapp.com/'
+    var proxyDomain = 'http://localhost:5000/';
+    var domain = proxyDomain+'https://ninja-dev.invotra.com/api/v0.3/';
+    var apis = {
+      login: domain + 'sessions/login',
+      get_all_users: domain + 'users/search?limit=2000',
+      get_users: domain + 'users/',
+      get_job_roles: domain + 'job_roles/',
+      get_teams: domain + 'teams/',
+      get_sites: domain + 'locations/sites/',
+      get_buildings: domain + 'locations/buildings/',
+      get_floors: domain + 'locations/floors/',
+      get_spaces: domain + 'locations/spaces/'
+    };
+    var authentication_user = {
+      username: 'abel carroll',
+      password: '4k4g3r4u53r'
+    };
+    fetch(apis.login, {
+      method: 'post',
+      headers: {
+        "Accept": 'application/json',
+        "Content-type": 'application/json'
+      },
+      body: JSON.stringify(authentication_user),
+      credentials: 'include'
+    })
+    .then(() => fetch(apis.get_all_users, {credentials: 'include'}))
+    .then(function (response) {
+      console.log(response);
+      return response;
+    })
     this.props.dispatch(fetchPosts());
   }
 
@@ -60,241 +93,26 @@ class Dashboard extends Component {
     return (
       <div className={s.root}>
         <Breadcrumb>
-          <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
+          <BreadcrumbItem>Home</BreadcrumbItem>
           <BreadcrumbItem active>Dashboard</BreadcrumbItem>
         </Breadcrumb>
         <h1 className="mb-lg">Dashboard</h1>
         <Row>
           <Col sm={12} md={6}>
-            <Widget
-              title={
-                <div>
-                  <div className="pull-right mt-n-xs">
-                    <input
-                      type="search"
-                      placeholder="Search..."
-                      className="form-control input-sm"
-                    />
-                  </div>
-                  <h5 className="mt-0 mb-3">
-                    <i className="fa fa-user mr-xs opacity-70" />{' '}
-                    Users
-                  </h5>
-                </div>
-              }
-            >
-              <Table responsive borderless className={cx('mb-0', s.usersTable)}>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Alice</td>
-                    <td>alice@email.com</td>
-                    <td>
-                      <span className="py-0 px-1 bg-success rounded text-white">active</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Bob</td>
-                    <td>bob@email.com</td>
-                    <td>
-                      <span className="py-0 px-1 bg-warning rounded text-white">delayed</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Duck</td>
-                    <td>duck@email.com</td>
-                    <td>
-                      <span className="py-0 px-1 bg-success rounded text-white">active</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Shepherd</td>
-                    <td>shepherd@email.com</td>
-                    <td>
-                      <span className="py-0 px-1 bg-danger rounded text-white">removed</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Widget>
+            
           </Col>
           <Col sm={12} md={6}>
-            <Widget title="Alerts">
-              <Alert
-                className="alert-sm"
-                color="warning"
-              >
-                <span className="fw-semi-bold">Warning:</span> Best check yo
-                self, you&#39;re not looking too good.
-              </Alert>
-              <Alert
-                className="alert-sm"
-                color="success"
-              >
-                <span className="fw-semi-bold">Success:</span> You successfully
-                read this important alert message.
-              </Alert>
-              <Alert
-                className="alert-sm"
-                color="info"
-              >
-                <span className="fw-semi-bold">Info:</span> This alert needs
-                your attention, but it&#39;s not super important.
-              </Alert>
-              <Alert
-                className="alert-sm clearfix"
-                color="danger"
-              >
-                <span className="fw-semi-bold">Danger:</span> Change this and
-                that and try again.
-                <span className="pull-right mr-sm">
-                  <Button color="danger" size="sm">
-                    Take this action
-                  </Button>
-                  <span className="px-2"> or </span>
-                  <Button color="default" size="sm">Cancel</Button>
-                </span>
-              </Alert>
-            </Widget>
+            
           </Col>
         </Row>
         <Row>
           <Col sm={6}>
-            <Widget
-              title={
-                <div>
-                  <div className="pull-right mt-n-xs">
-                    {/* eslint-disable */}
-                    <a href="#" className="td-underline fs-sm">
-                      Options
-                    </a>
-                    {/* eslint-enable */}
-                  </div>
-                  <h5 className="mt-0 mb-0">
-                    Recent posts{' '}
-                    <Badge color="success" className="ml-xs">
-                      5
-                    </Badge>
-                  </h5>
-                  <p className="fs-sm mb-0 text-muted">
-                    posts, that have been published recently
-                  </p>
-                </div>
-              }
-            >
-              <table className="table table-sm table-no-border mb-0">
-                <tbody>
-                {this.props.posts &&
-                this.props.posts.map(post => (
-                  <tr key={post.id}>
-                    <td>{new Date(post.updatedAt).toLocaleString()}</td>
-                    <td>
-                      <Link to="/app/posts">{post.title}</Link>
-                    </td>
-                  </tr>
-                ))}
-                {this.props.posts &&
-                !this.props.posts.length && (
-                  <tr>
-                    <td colSpan="100">No posts yet</td>
-                  </tr>
-                )}
-                {this.props.isFetching && (
-                  <tr>
-                    <td colSpan="100">Loading...</td>
-                  </tr>
-                )}
-                </tbody>
-              </table>
-            </Widget>
+            
           </Col>
           <Col sm={6}>
-            <ListGroup>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-phone mr-xs text-secondary" />{' '}
-                Incoming calls <Badge className="ml-xs" color="danger">3</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-bell-o mr-xs text-secondary" />{' '}
-                Notifications <Badge className="ml-xs" color="warning">6</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-comment-o mr-xs text-secondary" />{' '}
-                Messages <Badge className="ml-xs" color="success">18</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-eye mr-xs text-secondary" />{' '}
-                Visits total
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-cloud mr-xs text-secondary" /> Inbox{' '}
-              </Link>
-            </ListGroup>
+            
           </Col>
         </Row>
-        <Widget className="mt-lg" title="Some standard reactstrap components">
-          <Row>
-            <Col sm={6}>
-              <div className="mt">
-                <Button size="sm" color="default" className="mr-sm mb-xs">
-                  Default
-                </Button>
-                <Button size="sm" color="success" className="mr-sm mb-xs">
-                  Success
-                </Button>
-                <Button size="sm" color="info" className="mr-sm mb-xs">
-                  Info
-                </Button>
-                <Button size="sm" color="warning" className="mr-sm mb-xs">
-                  Warning
-                </Button>
-                <Button size="sm" color="danger" className="mb-xs">
-                  Danger
-                </Button>
-              </div>
-              <ButtonGroup className="mb">
-                <Button color="default">1</Button>
-                <Button color="default">2</Button>
-                <ButtonDropdown isOpen={this.state.isDropdownOpened} toggle={this.toggleDropdown}>
-                  <DropdownToggle color="default" caret>
-                    Dropdown
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>1</DropdownItem>
-                    <DropdownItem>2</DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
-              </ButtonGroup>
-              <p className="mb-0">
-                For more components please checkout{' '}
-                <a
-                  href="https://reactstrap.github.io/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  reactstrap documentation
-                </a>
-              </p>
-            </Col>
-            <Col sm={6}>
-              <Progress className="progress-sm" color="success" value={40} />
-              <Progress className="progress-sm" color="info" value={20} />
-              <Progress className="progress-sm" color="warning" value={60} />
-              <Progress className="progress-sm" color="danger" value={80} />
-            </Col>
-          </Row>
-        </Widget>
       </div>
     );
   }

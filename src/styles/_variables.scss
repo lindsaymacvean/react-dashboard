@@ -16,7 +16,7 @@ $font-size-sm: 0.875rem !default;
 $font-size-large: 1.1rem;
 $font-size-small: 0.9rem;
 $font-size-index: 0.7rem;
-$font-family-base: 'Nunito', 'HelveticaNeue-Light', sans-serif;
+$font-family-base: 'Libre Franklin', sans-serif;
 
 $line-height-computed: 1.5rem;
 
@@ -31,25 +31,25 @@ $glyphicons-halflings-font-base-size: 14px !default;
 
 $glyphicons-halflings-font-path: '../fonts/glyphicons' !default;
 
-$gray-100: #f9f6f2;
-$gray-200: #efedea;
-$gray-300: #cccbca;
-$gray-400: #ccc;
-$gray-500: #666;
-$gray-600: #6c757d;
-$gray-700: #4d4d4d;
-$gray-800: #343a40;
-$gray-900: #212529;
+$gray-100: #f9f6f2; // #f9f6f2
+$gray-200: #efedea; // #efedea
+$gray-300: #cccbca; // #cccbca
+$gray-400: #9a9fa7; // #ccc
+$gray-500: #868c95; // #666
+$gray-600: #5d6672; // #6c757d
+$gray-700: #495360; // #4d4d4d
+$gray-800: #35404f; // #343a40
+$gray-900: #2f3946; // #212529
 
 $gray-light: $gray-100;
 $text-muted: $gray-300 !default;
 
-$brand-primary:         #3754a5 !default; // #337ab7
-$brand-secondary:       #beccfd !default;
-$brand-success:         #1ab394 !default;
-$brand-info:            #5d80f9 !default;
-$brand-warning:         #f3c363 !default;
-$brand-danger:          #eb3349 !default;
+$brand-primary:         #4bb88b !default; // #3754a5 #337ab7
+$brand-secondary:       #9bbeaf !default; // #beccfd
+$brand-success:         #60987f !default; // #1ab394
+$brand-info:            #3da5d9 !default; // #5d80f9
+$brand-warning:         #fec601 !default; // #f3c363
+$brand-danger:          #ec812e !default; // #EC812E
 
 $theme-colors: (
   primary: $brand-primary,
@@ -66,7 +66,7 @@ $theme-colors: (
 );
 
 $text-color:                     $gray-700;
-$link-color:                     #337ab7;
+$link-color:                     #005ea5;
 
 $state-success-text:             $brand-success !default;
 $state-success-bg:               lighten($brand-success, 70%) !default;
@@ -99,7 +99,7 @@ $alert-danger-border:         rgba($alert-danger-text, 0.09) !default;
 //== Gradients
 //
 
-$logo-gradient: linear-gradient(to right, $brand-danger, #f45c43);
+$logo-gradient: linear-gradient(to right, $brand-danger, #f4b98b);
 
 //== Iconography
 //
@@ -153,13 +153,13 @@ $breadcrumb-padding-x: 0;
 $breadcrumb-bg: transparent;
 
 $widget-bg: #fff;
-$widget-title-color: #444;
+$widget-title-color: #333;
 $widget-padding-y: 15px;
 $widget-padding-x:  20px;
 
 $btn-inverse-color: #fff;
 $btn-inverse-bg: $gray-700;
-$btn-inverse-border: #414749;
+$btn-inverse-border: #333;
 
 $input-height-small: 2rem;
 

@@ -21,7 +21,7 @@ const Sidebar = () => (
         headerLink="/app"
         glyph="dashboard"
       />
-      <LinksGroup
+      {/* <LinksGroup
         header="Typography"
         headerLink="/app/typography"
         glyph="typography"
@@ -35,8 +35,8 @@ const Sidebar = () => (
         header="Notifications"
         headerLink="/app/notifications"
         glyph="notifications"
-      />
-      <LinksGroup
+      /> */}
+      {/* <LinksGroup
         header="Components"
         headerLink="/app/components"
         childrenLinks={[
@@ -54,7 +54,7 @@ const Sidebar = () => (
           },
         ]}
         glyph="components"
-      />
+      /> */}
     </ul>
   </nav>
 );

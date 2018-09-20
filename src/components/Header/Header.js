@@ -67,17 +67,17 @@ class Header extends React.Component {
           >
             <i className="fa fa-bars fa-2x text-muted" />
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <InputGroup>
               <Input placeholder="Search for..." />
               <InputGroupAddon addonType="append" className="px-2">
                 <i className="fa fa-search" />
               </InputGroupAddon>
             </InputGroup>
-          </NavItem>
+          </NavItem> */}
         </Nav>
         <Nav className="ml-auto">
-          <NavItem className={cx('', s.headerIcon)}>
+          {/* <NavItem className={cx('', s.headerIcon)}>
             <Button>
               <Icon glyph="mail"/>
               <span>8</span>
@@ -93,7 +93,7 @@ class Header extends React.Component {
             <Button>
               <Icon glyph="settings"/>
             </Button>
-          </NavItem>
+          </NavItem> */}
           <Dropdown isOpen={isOpen} toggle={this.toggleDropdown}>
             <DropdownToggle nav>
               <img className={cx('rounded-circle mr-sm', s.adminPhoto)} src={photo} alt="administrator" />
@@ -101,12 +101,12 @@ class Header extends React.Component {
               <i className={cx('fa fa-angle-down ml-sm', s.arrow, {[s.arrowActive]: isOpen})} />
             </DropdownToggle>
             <DropdownMenu style={{width: '100%'}}>
-              <DropdownItem>
+              {/* <DropdownItem>
                 <NavLink to="/app/posts">Posts</NavLink>
               </DropdownItem>
               <DropdownItem>
                 <NavLink to="/app/profile">Profile</NavLink>
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem onClick={this.doLogout}>
                 Logout
               </DropdownItem>
