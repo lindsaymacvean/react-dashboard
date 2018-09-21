@@ -48,21 +48,21 @@ class Dashboard extends Component {
 
   componentWillMount() {
     // Domain and API endpoints which are used for requests:
-    // var proxyDomain = 'https://invotra-api-cors-proxy.herokuapp.com/'
-    var proxyDomain = 'http://localhost:5000/';
-    var domain = proxyDomain+'https://ninja-dev.invotra.com/api/v0.3/';
-    var apis = {
-      login: domain + 'sessions/login',
-      get_all_users: domain + 'users/search?limit=2000',
-      get_users: domain + 'users/',
-      get_job_roles: domain + 'job_roles/',
-      get_teams: domain + 'teams/',
-      get_sites: domain + 'locations/sites/',
-      get_buildings: domain + 'locations/buildings/',
-      get_floors: domain + 'locations/floors/',
-      get_spaces: domain + 'locations/spaces/'
+    const proxyDomain = 'https://invotra-api-cors-proxy.herokuapp.com/'
+    // const proxyDomain = 'http://localhost:5000/';
+    const domain = `${proxyDomain}https://ninja-dev.invotra.com/api/v0.3/`;
+    const apis = {
+      login: `${domain  }sessions/login`,
+      get_all_users: `${domain  }users/search?limit=2000`,
+      get_users: `${domain  }users/`,
+      get_job_roles: `${domain  }job_roles/`,
+      get_teams: `${domain  }teams/`,
+      get_sites: `${domain  }locations/sites/`,
+      get_buildings: `${domain  }locations/buildings/`,
+      get_floors: `${domain  }locations/floors/`,
+      get_spaces: `${domain  }locations/spaces/`
     };
-    var authentication_user = {
+    const authentication_user = {
       username: 'abel carroll',
       password: '4k4g3r4u53r'
     };
@@ -76,7 +76,8 @@ class Dashboard extends Component {
       credentials: 'include'
     })
     .then(() => fetch(apis.get_all_users, {credentials: 'include'}))
-    .then(function (response) {
+    .then(response => response.json())
+    .then(response => {
       console.log(response);
       return response;
     })
@@ -98,20 +99,12 @@ class Dashboard extends Component {
         </Breadcrumb>
         <h1 className="mb-lg">Dashboard</h1>
         <Row>
-          <Col sm={12} md={6}>
-            
-          </Col>
-          <Col sm={12} md={6}>
-            
-          </Col>
+          <Col sm={12} md={6} />
+          <Col sm={12} md={6} />
         </Row>
         <Row>
-          <Col sm={6}>
-            
-          </Col>
-          <Col sm={6}>
-            
-          </Col>
+          <Col sm={6} />
+          <Col sm={6} />
         </Row>
       </div>
     );
