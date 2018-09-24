@@ -25,10 +25,21 @@ import {
 
 import Widget from '../../components/Widget';
 
+// Chart
+import BarChart from '../charts/charts/BarChart';
+
 import { fetchPosts } from '../../actions/posts';
 import s from './Dashboard.scss';
+import SimpleBarChart from '../charts/charts/BarChart';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [ {name: 'Active Users', Active: 0, Inactive: 0} ]
+    }
+  }
+  
   /* eslint-disable */
   static propTypes = {
     posts: PropTypes.any,
@@ -53,7 +64,7 @@ class Dashboard extends Component {
     const domain = `${proxyDomain}https://ninja-dev.invotra.com/api/v0.3/`;
     const apis = {
       login: `${domain  }sessions/login`,
-      get_all_users: `${domain  }users/search?limit=2000`,
+      get_all_users: `${domain  }users/search?limit=3000`,
       get_users: `${domain  }users/`,
       get_job_roles: `${domain  }job_roles/`,
       get_teams: `${domain  }teams/`,
@@ -81,6 +92,25 @@ class Dashboard extends Component {
       console.log(response);
       return response;
     })
+    .then(response => {
+      var count = 0, total = 0;
+      for (var i = 0; i<response.results.length; i++) {
+        var result = response.results[i];
+        total++;
+        if (result.status === "Active") {
+          count++;
+        }
+      }
+
+      let data = this.state.data;
+
+      data[0].Active = count;
+      data[0].Inactive = total-count;
+      console.log(data);
+
+      this.setState({ data });
+      //SimpleBarChart.forceUpdate();
+    })
     this.props.dispatch(fetchPosts());
   }
 
@@ -99,7 +129,12 @@ class Dashboard extends Component {
         </Breadcrumb>
         <h1 className="mb-lg">Dashboard</h1>
         <Row>
-          <Col sm={12} md={6} />
+          <Col sm={12} md={6}> 
+            <Widget
+              title={<h5>Simple <span className="fw-semi-bold">Bar Chart</span></h5>}>
+              <BarChart data={this.state.data} />
+            </Widget>
+          </Col>
           <Col sm={12} md={6} />
         </Row>
         <Row>
